@@ -15,7 +15,10 @@
  */
 package io.pantheon.flare
 
-import com.squareup.kotlinpoet.*
+import com.squareup.kotlinpoet.FileSpec
+import com.squareup.kotlinpoet.PropertySpec
+import com.squareup.kotlinpoet.TypeSpec
+import com.squareup.kotlinpoet.asTypeName
 import java.io.File
 
 fun generateEventPropertyMappings(props: List<String>) {
@@ -32,10 +35,10 @@ fun generateEventPropertyMappings(props: List<String>) {
         )
     }
 
-    FileSpec.builder("", "AnalyticsPayload")
+    FileSpec.builder("io.pantheon.flare.generated", "AnalyticsPayload")
         .addType(typeBuilder.build())
         .build()
-        .writeTo(File("flare/src/main/java/io/pantheon/flare"))
+        .writeTo(File("flare/src/main/java"))
 }
 
 fun String.snakeToCamelCase(): String {
